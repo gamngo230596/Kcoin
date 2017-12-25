@@ -1,0 +1,52 @@
+<div class="signin">
+	<div class="title">KCOIN</div>
+	<div class="container">    
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">Sign In</div>
+                    <div class="forgot"><a [routerLink]="['/forgot']">Forgot password?</a></div>
+                </div>     
+
+                <div class="panel-body" >
+
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                    <form class="form-horizontal" role="form">        
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username or Email">        
+                        </div>
+                            
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls">
+                              <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group btn-signup">
+                            <div class="col-md-12 control">
+                                <div class="text-signup">
+                                    Don't have an account! 
+                                <a [routerLink]="['/signup']">
+                                    Sign Up Here
+                                </a>
+                                </div>
+                            </div>
+                        </div>    
+                    </form>     
+
+
+
+                        </div>                     
+                    </div>  
+        </div>
+    </div>
+</div>    

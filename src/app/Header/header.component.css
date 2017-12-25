@@ -1,0 +1,22 @@
+.header .header {
+	background-color: blue;
+	padding: 10px 10px 10px 10px;
+	
+}
+.header .navbar {
+	border-radius: 0px;
+}
+.header .navbar-inverse {
+	border-color: blue;
+}
+.header .title {
+	font-size: 40px;
+	font-weight: bold;
+	color: white;
+}
+.header .navbar-nav a {
+	color: white;
+}
+.header .navbar-toggle {
+	color: white;
+}

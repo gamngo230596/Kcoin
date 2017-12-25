@@ -1,0 +1,41 @@
+.signup {
+	width: 100%;
+	height: 100%;
+	background-color: blue;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	overflow-y: scroll;
+}
+.signup .title {
+	font-size: 40px;
+	font-weight: bold;
+	color: white;
+	padding: 30px 0px 30px 30px;
+}
+.signup .forgot {
+	float:right;
+	font-size: 80%; 
+	position: relative;
+	top:-10px
+}
+.signup .panel-body {
+	padding-top: 30px;
+}
+.signup .input {
+	padding: 0px 20px 0px 20px;
+}
+.signup .btn-login {
+	margin-top: 10px;
+}
+.signup .btn-signup .text-signup{
+	border-top: 1px solid#888; 
+	padding-top:15px;
+	font-size:85%
+}
+.signup .ng-valid[required], .ng-valid.required {
+	border-left: 5px solid #42A948;
+}
+.signup	.ng-invalid:not(form) {
+	border-left: 5px solid #a94442;
+}

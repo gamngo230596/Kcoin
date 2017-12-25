@@ -1,0 +1,78 @@
+<div class="signup">
+	<div class="title">KCOIN</div>
+	<div class="container">    
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="panel-title">Sign Up</div>
+                </div>     
+            <div class="panel-body" >
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <form class="form-horizontal" role="form" [formGroup]="form">    
+                    	<div class="form-group input">
+						    <label for="InputEmail">Email address</label>
+						    <input type="email" class="form-control" id="InputEmail" placeholder="Email" formControlName="email">
+						    <div class="alert alert-danger" *ngIf="!form.controls['email'].valid && (form.controls['email'].dirty || form.controls['email'].touched)">
+						    	Email is Valid!
+						    </div>
+						</div>
+					  	<div class="form-group input">
+						    <label for="InputFirstName">First Name</label>
+						    <input type="text" class="form-control" id="InputFirstName" placeholder="First Name" formControlName="firstname">
+						    <div class="alert alert-danger" *ngIf="!form.controls['firstname'].valid && (form.controls['firstname'].dirty || form.controls['firstname'].touched)">
+						    	First name must be at least 1 character and cannot more than 10 characters
+						    </div>
+					  	</div>
+					  	<div class="form-group input">
+						    <label for="InputLastName">Last Name</label>
+						    <input type="text" class="form-control" id="InputLastName" placeholder="Last Name" formControlName="lastname">
+						    <div class="alert alert-danger" *ngIf="!form.controls['lastname'].valid && (form.controls['lastname'].dirty || form.controls['lastname'].touched)">
+						    	Last name must be at least 1 character and cannot more than 10 characters
+						    </div>
+					  	</div>
+					  	<div class="form-group input">
+						    <label for="InputPassword">Password</label>
+						    <input type="password" class="form-control" id="InputPassword" placeholder="Password" formControlName="password">
+						    <div class="alert alert-danger" *ngIf="!form.controls['password'].valid && (form.controls['password'].dirty || form.controls['password'].touched)">
+						    	Password must be at least 1 upper case, 1 number, 1 special character, and from  6 to 20 characters
+						    </div>
+					  	</div>
+					  	<div class="form-group input">
+						    <label for="InputConfirmPassword">Confirm Password</label>
+						    <input type="password" class="form-control" id="InputConfirmPassword" placeholder="Confirm Password" formControlName="confirm">
+						   <div class="alert alert-danger" *ngIf="!form.valid && (form.dirty || form.touched)">
+						   		Password not mismatch!
+						   </div>
+						    
+					  	</div>
+		                <div class="form-group btn-signup">
+		                   
+		                    <div class="col-sm-12 controls" >
+		                    	<button type="button" class="btn btn-success" disabled *ngIf="!form.valid">
+		                    		Sign Up 
+		                    	</button>
+		                      
+		                    </div>
+		                </div>
+
+
+		                <div class="form-group btn-signup">
+		                    <div class="col-md-12 control">
+		                        <div  class="text-signup">
+		                            Do you have an account? Please
+		                        <a [routerLink]="['/signin']">
+		                            Sign In
+		                        </a>
+		                        </div>
+		                    </div>
+		                </div>    
+		            </form>  
+
+
+
+	                        </div>                     
+	                    </div>  
+	        </div>
+	        
+	    </div>
+</div>

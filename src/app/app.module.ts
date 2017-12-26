@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { HttpModule } from '@angular/http';
 import { HomeComponent } from './Home/home.component';
 import { SignInComponent } from './User/SignIn/signin.component';
 import { SignUpComponent } from './User/SignUp/signup.component';
@@ -21,6 +22,7 @@ import { NavService } from './Service/nav.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'signin',component: SignInComponent},

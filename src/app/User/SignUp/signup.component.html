@@ -8,7 +8,7 @@
                 </div>     
             <div class="panel-body" >
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                    <form class="form-horizontal" role="form" [formGroup]="form">    
+                    <form class="form-horizontal" role="form" [formGroup]="form" (submit)="onSubmit(form)">    
                     	<div class="form-group input">
 						    <label for="InputEmail">Email address</label>
 						    <input type="email" class="form-control" id="InputEmail" placeholder="Email" formControlName="email">
@@ -48,7 +48,10 @@
 		                <div class="form-group btn-signup">
 		                   
 		                    <div class="col-sm-12 controls" >
-		                    	<button type="button" class="btn btn-success" disabled *ngIf="!form.valid">
+		                    	<button type="button" class="btn btn-success" (click)="SignUp(form.value)" disabled="!form.controls['confirm'].valid" *ngIf="!form.controls['confirm'].valid">
+		                    		Sign Up 
+		                    	</button>
+		                    	<button type="button" class="btn btn-success" (click)="SignUp(form.value)" *ngIf="!form.controls['confirm'].invalid">
 		                    		Sign Up 
 		                    	</button>
 		                      

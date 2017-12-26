@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { NavService } from '../../Service/nav.service';
+import * as Crypto from 'crypto-js';
 import { FormGroup, FormControl, Validators,FormBuilder, AbstractControl } from '@angular/forms';
 @Component({
     selector: 'app-signup',
@@ -7,12 +8,10 @@ import { FormGroup, FormControl, Validators,FormBuilder, AbstractControl } from 
     styleUrls: ['./signup.component.css']
 })
 export class SignUpComponent implements OnInit{
-	
     constructor(public nav: NavService){
     	
     }
     form;
-
     ngOnInit(){
     	this.nav.hide();
     	let passwordMatchValidator=function(fg: FormGroup){
@@ -37,6 +36,16 @@ export class SignUpComponent implements OnInit{
 			]))
     	},passwordMatchValidator);
     	
+    }
+    SignUp(userInfo){
+        let objuser={
+            email: userInfo.email,
+            firstname: userInfo.firstname,
+            lastname: userInfo.lastname,
+            password: Crypto.AES.encrypt(userInfo.password,"secret key")
+        }
+        console.log(objuser);
+        this.nav.addUser(objuser);
     }
 
 }

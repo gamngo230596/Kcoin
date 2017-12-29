@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule,Router } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Headers} from '@angular/http';
 import { HomeComponent } from './Home/home.component';
 import { SignInComponent } from './User/SignIn/signin.component';
 import { SignUpComponent } from './User/SignUp/signup.component';
 import { ForgotComponent } from './User/Forgot/forgot.component';
+import { ValidateComponent } from './User/Validation/validate.component';
 import { HeaderComponent } from './Header/header.component';
 import { NavService } from './Service/nav.service';
 @NgModule({
@@ -17,7 +18,8 @@ import { NavService } from './Service/nav.service';
     SignInComponent,
     HeaderComponent,
     SignUpComponent,
-    ForgotComponent
+    ForgotComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { NavService } from './Service/nav.service';
       {path:'signin',component: SignInComponent},
       {path:'signup',component: SignUpComponent},
       {path:'forgot',component: ForgotComponent},
+      {path:'validate/:id',component: ValidateComponent},
       {path:'',component:HomeComponent},
       {path:'**',component:HomeComponent}
     ])

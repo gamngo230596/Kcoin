@@ -12,21 +12,23 @@
 
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                    <form class="form-horizontal" role="form">        
+                    <form class="form-horizontal" role="form" [formGroup]="frmSignIn">        
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username or Email">        
+                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="ID wallet" formControlName="ID">        
                         </div>
                             
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="Password">
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="Password" formControlName="password">
                         </div>
                         <div class="form-group">
                             <!-- Button -->
 
                             <div class="col-sm-12 controls">
-                              <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                                <button type="button" class="btn btn-success" (click)="SignIn(frmSignIn.value)">
+                                    Sign In 
+                                </button>
                             </div>
                         </div>
 

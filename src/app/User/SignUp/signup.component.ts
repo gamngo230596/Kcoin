@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { NavService,IMessage } from '../../Service/nav.service';
 import { Router } from '@angular/router'
 import * as Crypto from 'crypto-js';
+import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators,FormBuilder, AbstractControl } from '@angular/forms';
 @Component({
     selector: 'app-signup',
@@ -10,19 +11,18 @@ import { FormGroup, FormControl, Validators,FormBuilder, AbstractControl } from 
 })
 export class SignUpComponent implements OnInit{
     constructor(public nav: NavService){
-    	
+    	console.log(Crypto.HmacSHA1("Message", "Key").toString());
     }
     router : Router;
     form;
-    UserCurr:any;
+    UserCurr:any=[];
     messageErr;
-    id:any;
     message: IMessage={};
     ngOnInit(){
     	this.nav.hide();
         let that=this;
         this.nav.getUser().subscribe(users=>{that.UserCurr=users});
-        setTimeout(()=>{console.log(this.UserCurr);},2500);
+        setTimeout(()=>{console.log(this.UserCurr);},5000);
     	let passwordMatchValidator=function(fg: FormGroup){
     		console.log(fg.get('password').value);
     		return fg.get('password').value===fg.get('confirm').value ? null : {'mismatch':true}
@@ -47,52 +47,83 @@ export class SignUpComponent implements OnInit{
     	
     }
     SignUp(userInfo){
+        console.log(this.UserCurr.length);
         let objuser={
             email: userInfo.email,
             firstname: userInfo.firstname,
             lastname: userInfo.lastname,
-            password: Crypto.AES.encrypt(userInfo.password,"secret key"),
-            active: 0
+            password: Crypto.AES.encrypt(userInfo.password,"secret key").toString(),
+            idwallet: Crypto.HmacSHA1(Math.random().toString(),"secret key").toString()
         }
-        console.log(objuser);
-        if(this.UserCurr.length===0)
+       if(this.UserCurr.length===0)
         {
-
-        }
-        else{
-            if(!this.checkEmail(userInfo.email)){
-                let that=this;
-                //this.nav.addUser(objuser).subscribe((data)=>{console.log(data);that.messageErr="Check mail to actived account!"});
-                let obj={
-                    email: userInfo.email,
-                    id:this.id
-                }
-                this.message=obj;
-                setTimeout(()=>{console.log(this.UserCurr);},2500);
-                /*this.nav.sendEmail(this.message).subscribe(res=>{
+            this.messageErr='';
+            let that=this;
+            this.nav.addUser(objuser).subscribe(
+            data=>console.log(data),
+            error=>console.log(error),
+            ()=>this.messageErr="Check Mail!");
+            let obj={
+                email: userInfo.email,
+                id:objuser.idwallet
+            }
+            console.log(this.messageErr);
+            this.message=obj;
+            console.log(this.message);
+            
+             
+            setTimeout(()=>{
+                    this.nav.sendEmail(this.message).subscribe(res=>{
                     console.log('Success!',res);
                 },error=>{
                     console.log('Err',error);
-                })*/
+                })
+            },5000);
+        }
+        else {
+            if(!this.checkEmail(userInfo.email)){
+                this.messageErr='';
+                let that=this;
+                this.nav.addUser(objuser).subscribe(
+                data=>console.log(data),
+                error=>console.log(error),
+                ()=>this.messageErr="Check Mail!");
+                let obj={
+                    email:  userInfo.email,
+                    id:objuser.idwallet
+                }
+                console.log(this.messageErr);
+                this.message=obj;
+                console.log(this.message);
+                
+                setTimeout(()=>{
+                        this.nav.sendEmail(this.message).subscribe(res=>{
+                        console.log('Success!',res);
+                    },error=>{
+                        console.log('Err',error);
+                    })
+                },5000);
+                
             }
             else {
-                this.messageErr="Trùng email!"
+                this.messageErr="Trùng!"
             }
         }
+        
+        
+            
+        
        
            
     }
     checkEmail(email){
         for(let i=0;i<this.UserCurr.length;i++)
         {
-            if(email===this.UserCurr.email)
+            if(email===this.UserCurr[i].email)
             {
-                this.id=this.UserCurr._id;
                 return true;
             }
         }
         return false;
     }
-
-
 }

@@ -10,32 +10,54 @@ import * as Crypto from 'crypto-js';
 })
 export class SignInComponent implements OnInit{
     constructor(public nav: NavService,public route :Router){
+        let that=this;
+        this.nav.getUser().subscribe(users=>{that.UserCurr=users});
+        setTimeout(()=>{
+            console.log(this.UserCurr); 
+        },5000);
+        
     }
     frmSignIn;
-    UserCurr:any;
+    UserCurr:any=[];
+    messageErr;
     ngOnInit(){
     	this.nav.hide();
-    	let that=this;
-        this.nav.getUser().subscribe(users=>{that.UserCurr=users});
-        setTimeout(()=>{console.log(this.UserCurr);},2500);
+    	
         this.frmSignIn=new FormGroup({
         	ID: new FormControl(),
         	password: new FormControl()
         })
     }
     SignIn(user){
-    	let info={
-    		ID: user.ID,
-    		password: Crypto.AES.decrypt(user.password,"secret key")
-    	}
-    	for(let i=0;i<this.UserCurr.length;i++)
-    	{
-    		let pass=Crypto.AES.decrypt(this.UserCurr[i].password,"secret key")
-    		if(this.UserCurr[i]._id===info.ID && pass===info.password && this.UserCurr[i].active)
-    		{
-    			this.nav.setSignIn();
-    			this.route.navigate(['/dashboard']);
-    		}
-    	}
+        let that=this;
+        this.nav.getUser().subscribe(users=>{that.UserCurr=users});
+        setTimeout(()=>{
+            console.log(this.UserCurr);
+        },5000);
+        setTimeout(()=>{
+            let info={
+                ID: user.ID,
+                password: user.password
+            }
+        console.log(info.password);
+        setTimeout(()=>{
+            console.log(info.password);
+        },5000);
+        for(let i=0;i<this.UserCurr.length;i++)
+        {
+
+            let pass=Crypto.AES.decrypt(this.UserCurr[i].password,"secret key").toString(Crypto.enc.Utf8);
+            console.log(pass);
+            if(this.UserCurr[i].idwallet===info.ID && pass===info.password && this.UserCurr[i].active)
+            {
+                this.nav.setSignIn();
+                this.route.navigate(['/dashboard']);
+            }
+        }
+        if(!this.nav.setSignIn()){
+            this.messageErr="Check mail to active your account!";
+        }
+    },2000);
+    	
     }
 }

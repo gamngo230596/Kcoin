@@ -11,7 +11,9 @@
 	$from_email = $request->email;
 	$id = $request->id;
 	echo($from_email);
-	$mail = new PHPMailer();
+    if(!empty($id))
+    {
+        $mail = new PHPMailer();
 
     //set a host
     $mail->Host = "mail.smtp2go.com";
@@ -41,19 +43,26 @@
 
     //set body
     $mail->Body = '<a href="http://localhost:4200/validate/'.$id.'">Activated!</a>'.
-                    'ID wallet: '.$id.'to sign in';
+                    '  ID wallet: '.$id.'  to sign in';
 
    
 
     //set who is sending an email
-    $mail->setFrom($from_email, 'KCoin');
+    $mail->setFrom('gamcornpink96@gmail.com', 'KCoin');
 
     //set where we are sending email (recipients)
-    $mail->addAddress('gamcornpink96@gmail.com');
+    $mail->addAddress($from_email);
 
     //send an email
     if ($mail->send())
         echo "mail is sent";
     else
         echo $mail->ErrorInfo;
+
+    }
+    else {
+        $response_array['status'] = 'error';
+        echo json_encode($response_array);
+    }
+	
 ?>

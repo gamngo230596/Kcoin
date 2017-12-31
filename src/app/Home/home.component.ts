@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
 	console.log("that");
 	this.nav.getUser().subscribe(users=>{that.user=users});
 	setTimeout(()=>{console.log(this.user);},2500);
-	this.nav.getAddress().subscribe(add=>{console.log(add)});
 	//console.log(this.user);
 	
 }

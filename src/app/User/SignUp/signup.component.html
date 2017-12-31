@@ -13,7 +13,7 @@
 						    <label for="InputEmail">Email address</label>
 						    <input type="email" class="form-control" id="InputEmail" placeholder="Email" formControlName="email">
 						    <div class="alert alert-danger" *ngIf="!form.controls['email'].valid && (form.controls['email'].dirty || form.controls['email'].touched)">
-						    	Email is Valid!
+						    	Email is Invalid!
 						    </div>
 						</div>
 					  	<div class="form-group input">
@@ -45,16 +45,14 @@
 						   </div>
 						    
 					  	</div>
-					  	{{messageErr}}
+					  	<div class="err"> <i>{{messageErr}}</i></div>
 		                <div class="form-group btn-signup">
 		                   
 		                    <div class="col-sm-12 controls" >
-		                    	<button type="button" class="btn btn-success" (click)="SignUp(form.value)" disabled="!form.controls['confirm'].valid" *ngIf="!form.controls['confirm'].valid">
+		                    	<button type="button" class="btn btn-success" (click)="SignUp(form.value)" [disabled]="!form.controls['confirm'].valid">
 		                    		Sign Up 
 		                    	</button>
-		                    	<button type="button" class="btn btn-success" (click)="SignUp(form.value)" *ngIf="!form.controls['confirm'].invalid">
-		                    		Sign Up 
-		                    	</button>
+		                    	
 		                      
 		                    </div>
 		                </div>

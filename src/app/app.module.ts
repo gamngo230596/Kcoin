@@ -10,6 +10,9 @@ import { SignUpComponent } from './User/SignUp/signup.component';
 import { ForgotComponent } from './User/Forgot/forgot.component';
 import { ValidateComponent } from './User/Validation/validate.component';
 import { HeaderComponent } from './Header/header.component';
+import { DashboardComponent } from './Dashboard/dashboard.component';
+import { OverviewComponent } from './Overview/overview.component';
+import { TransactionComponent } from './Transaction/transaction.component';
 import { NavService } from './Service/nav.service';
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NavService } from './Service/nav.service';
     HeaderComponent,
     SignUpComponent,
     ForgotComponent,
-    ValidateComponent
+    ValidateComponent,
+    DashboardComponent,
+    OverviewComponent,
+    SpecsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,12 @@ import { NavService } from './Service/nav.service';
       {path:'signin',component: SignInComponent},
       {path:'signup',component: SignUpComponent},
       {path:'forgot',component: ForgotComponent},
+      {path:'dashboard',component: DashboardComponent,
+        children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: OverviewComponent },
+      { path: 'specs', component: SpecsComponent }
+    ]},
       {path:'validate/:id',component: ValidateComponent},
       {path:'',component:HomeComponent},
       {path:'**',component:HomeComponent}

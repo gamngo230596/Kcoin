@@ -28,8 +28,8 @@ export class ValidateComponent implements OnInit{
                
                 this.nav.activeUser(this.UserCurr[i]._id.toString()).subscribe(
                 data=>console.log(data),
-                error=>console.log(error),
-                ()=>this.actived=true);
+                ()=>this.actived=true)
+               
             }
         }
         },5000);

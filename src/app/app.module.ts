@@ -13,6 +13,8 @@ import { HeaderComponent } from './Header/header.component';
 import { DashboardComponent } from './Dashboard/dashboard.component';
 import { OverviewComponent } from './Overview/overview.component';
 import { TransactionComponent } from './Transaction/transaction.component';
+import { RechargeComponent } from './Recharge/recharge.component';
+import { WithdrawalComponent } from './Withdrawal/withdrawal.component';
 import { NavService } from './Service/nav.service';
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { NavService } from './Service/nav.service';
     ValidateComponent,
     DashboardComponent,
     OverviewComponent,
-    TransactionComponent
+    TransactionComponent,
+    RechargeComponent,
+    WithdrawalComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { NavService } from './Service/nav.service';
         children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: OverviewComponent },
-      { path: 'transaction', component: TransactionComponent }
+      { path: 'transaction', component: TransactionComponent },
+      { path: 'recharge', component: RechargeComponent },
+      { path: 'withdrawal', component: WithdrawalComponent },
     ]},
       {path:'validate/:id',component: ValidateComponent},
       {path:'',component:HomeComponent},

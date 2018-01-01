@@ -11,24 +11,39 @@
 
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                    <form class="form-horizontal" role="form">        
+                    <form class="form-horizontal" role="form" [formGroup]="formForget">        
                         <div class="form-group input">
                             <label for="InputEmail">Email address</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="Email">
+                            <input type="email" class="form-control" id="InputEmail" placeholder="Email" formControlName="email">
+                            <div class="alert alert-danger" *ngIf="!formForget.controls['email'].valid  && (formForget.controls['email'].dirty || formForget.controls['email'].touched)">
+                                Email is Invalid!
+                            </div>
                         </div>
                         <div class="form-group input">
                             <label for="InputPassword">New Password</label>
-                            <input type="text" class="form-control" id="InputPassword" placeholder="First Name">
+                            <input type="password" class="form-control" id="InputPassword" placeholder="New Password" formControlName="password" >
+                            <div class="alert alert-danger" *ngIf="!formForget.controls['password'].valid && (formForget.controls['password'].dirty || formForget.controls['password'].touched)">
+                                Password must be at least 1 upper case, 1 number, 1 special character, and from  6 to 20 characters
+                            </div>
                         </div>
                         <div class="form-group input">
                             <label for="InputConfirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" id="InputConfirmPassword" placeholder="Confirm Password">
+                            <input type="password" class="form-control" id="InputConfirmPassword" placeholder="Confirm Password" formControlName="confirmpassword">
+                            <div class="alert alert-danger" *ngIf="!formForget.valid && (formForget.dirty || formForget.touched)">
+                                Password not mismatch!
+                           </div>
                         </div>
                         <div class="form-group">
                             <!-- Button -->
 
                             <div class="col-sm-12 controls">
-                              <a id="btn-login" href="#" class="btn btn-success">Reset Password  </a>
+                              <button id="btn-login" (click)="Forgot(formForget.value)" class="btn btn-success" data-toggle="modal" data-target="#myModal" [disabled]="!formForget.controls['confirmpassword'].valid">Reset Password  </button>
+
+
+
+                            </div>
+                            <div class="err" style="margin-left: 20px;">
+                                <i>{{messageErr}}</i>
                             </div>
                         </div>
 
@@ -47,8 +62,36 @@
 
 
 
+
+
                         </div>                     
                     </div>  
         </div>
     </div>
-</div>    
+
+
+</div>   
+  <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Validate Email</h4>
+    </div>
+    <div class="modal-body">
+        <label for="InputVerify">Verify Code</label>
+        <input type="text" class="form-control" id="InputVerify" placeholder="Verify" #verify>
+        <div class="controls" style="margin-top: 20px;">
+            <button id="btn-login" (click)="Verify(verify.value)" class="btn btn-success">Verify  </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  
+</div>
+</div> 

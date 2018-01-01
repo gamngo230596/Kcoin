@@ -25,7 +25,7 @@ import { NavService } from './Service/nav.service';
     ValidateComponent,
     DashboardComponent,
     OverviewComponent,
-    SpecsComponent
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +40,7 @@ import { NavService } from './Service/nav.service';
         children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: OverviewComponent },
-      { path: 'specs', component: SpecsComponent }
+      { path: 'transaction', component: TransactionComponent }
     ]},
       {path:'validate/:id',component: ValidateComponent},
       {path:'',component:HomeComponent},

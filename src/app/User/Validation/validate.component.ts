@@ -28,16 +28,19 @@ export class ValidateComponent implements OnInit{
                
                 this.nav.activeUser(this.UserCurr[i]._id.toString()).subscribe(
                 data=>console.log(data),
-                ()=>this.actived=true)
+                error=>console.log(error),
+                ()=>this.actived=true);
                
             }
         }
         },5000);
-        
+        setTimeout(()=>{
+            console.log(this.actived);
+            if(this.actived){
+                this.router.navigate(['./signin']);
+            }
+        },8000);
     	
-        if(this.actived){
-            this.router.navigate(['./signin']);
-        }
     }
     
 }

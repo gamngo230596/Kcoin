@@ -21,5 +21,6 @@ export class HomeComponent implements OnInit {
 	setTimeout(()=>{console.log(this.user);},2500);
 	//console.log(this.user);
 	
+	
 }
 }

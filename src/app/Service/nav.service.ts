@@ -24,19 +24,19 @@ export class NavService {
   setSignIn(){this.flagSignIn=true;}
   setSignOut(){this.flagSignIn=false;}
   getUser(){
-  	return this.http.get('http://localhost:3000/api/admin').map(res=>res.json());
+  	return this.http.get('https://api-kcoin.herokuapp.com/api/admin').map(res=>res.json());
   }
   addUser(user){
-    return this.http.post('http://localhost:3000/api/admin',{idwallet:user.idwallet,email:user.email,password:user.password,firstname:user.firstname,lastname:user.lastname}).map((data:any)=>{console.log(data)});
+    return this.http.post('https://api-kcoin.herokuapp.com/api/admin',{idwallet:user.idwallet,email:user.email,password:user.password,firstname:user.firstname,lastname:user.lastname}).map((data:any)=>{console.log(data)});
   }
   activeUser(id){
-    return this.http.put('http://localhost:3000/api/admin/active/'+id,{id:id}).map((data:any)=>{console.log(data)});
+    return this.http.put('https://api-kcoin.herokuapp.com/api/admin/active/'+id,{id:id}).map((data:any)=>{console.log(data)});
   }
   saveNewBlock(id){
-    return this.http.post('http://localhost:3000/api/admin/newblocks',{id:id}).map((data:any)=>{console.log(data)});
+    return this.http.post('https://api-kcoin.herokuapp.com/api/admin/newblocks',{id:id}).map((data:any)=>{console.log(data)});
   }
   changePassword(password,id){
-    return this.http.put('http://localhost:3000/api/admin/'+id,{newpassword:password}).map((data:any)=>{console.log(data)});
+    return this.http.put('https://api-kcoin.herokuapp.com/api/admin/'+id,{newpassword:password}).map((data:any)=>{console.log(data)});
   }
   sendEmail(user:IMessage):Observable<IMessage> | any{
     return this.http.post(this.Url,user)

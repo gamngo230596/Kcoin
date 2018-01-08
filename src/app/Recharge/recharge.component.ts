@@ -8,8 +8,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class RechargeComponent {
     constructor(public nav: NavService,private route: Router){}
+    address;
     ngOnInit(){
-    	
+    	this.nav.hide();
+        let that=this;
+        this.nav.getUser().subscribe(data=>{that.address = data[0].address});
+        setTimeout(()=>{console.log(this.address);},5000);
     }
      
 }

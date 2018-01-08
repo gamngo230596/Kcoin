@@ -16,10 +16,14 @@ export class NavService {
   flagSignIn:boolean;
   Url='http://localhost:81/email.php';
   UrlValidate='http://localhost:81/sendmailvalidate.php';
+  UrlStatus='http://localhost:81/sendemailstatus.php'
   users=[];
+  address="";
+  id="";
+  email="";
   constructor(public http:Http) {this.visible=false; }
   hide() { this.visible = false; }
-
+  setidwallet(address,id,email){this.address=address;this.id=id;this.email=email}
   show() { this.visible = true; }
   setSignIn(){this.flagSignIn=true;}
   setSignOut(){this.flagSignIn=false;}
@@ -32,16 +36,45 @@ export class NavService {
   activeUser(id){
     return this.http.put('https://api-kcoin.herokuapp.com/api/admin/active/'+id,{id:id}).map((data:any)=>{console.log(data)});
   }
-  saveNewBlock(id){
-    return this.http.post('https://api-kcoin.herokuapp.com/api/admin/newblocks',{id:id}).map((data:any)=>{console.log(data)});
-  }
   changePassword(password,id){
     return this.http.put('https://api-kcoin.herokuapp.com/api/admin/'+id,{newpassword:password}).map((data:any)=>{console.log(data)});
   }
+  getBalance(address){
+    return this.http.get('http://localhost:3000/api/admin/money/'+address.toString()).map(res=>res.json());
+  }
+  transactionsHis(addressmain,address,status){
+    return this.http.post('http://localhost:3000/api/admin/transactionsHis',{"addressmain":addressmain,"address":address,"status":status}).map((data:any)=>{console.log(data)});
+  }
+  withdrawal(address, money){
+    return this.http.post('http://localhost:3000/api/admin/withdrawal/',{address:address,money:money}).map((data:any)=>{console.log(data)});
+  }
+  getTransaction(id){
+    return this.http.get('http://localhost:3000/api/admin/gettransaction/'+id).map(res=>res.json());
+  }
+  updateActualBalance(id,actual){
+    return this.http.put('http://localhost:3000/api/admin/updateactual/'+id,{actual:actual}).map((data:any)=>{console.log(data)});
+  }
+  updateAvailableBalance(id,available){
+    return this.http.put('http://localhost:3000/api/admin/updateavailable/'+id,{newavailable:available}).map((data:any)=>{console.log(data)});
+  }
+  updateStatus(id,status){
+    return this.http.put('http://localhost:3000/api/admin/updatestatus/'+id,{status:status}).map((data:any)=>{console.log(data)});
+  }  
   sendEmail(user:IMessage):Observable<IMessage> | any{
     return this.http.post(this.Url,user)
     .map(res=>{
       console.log('Success',user);
+      return res;
+    })
+    .catch (err=>{
+      console.log('err');
+      return Observable.throw(err);
+    })
+  }
+  sendEmailStatus(trans:IMessage):Observable<IMessage> | any{
+    return this.http.post(this.UrlStatus,trans)
+    .map(res=>{
+      console.log('Success',trans);
       return res;
     })
     .catch (err=>{

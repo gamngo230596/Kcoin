@@ -60,6 +60,7 @@ export class SignInComponent implements OnInit{
             {
                 if(this.UserCurr[i].active){
                     this.nav.setSignIn();
+                    this.nav.setidwallet(this.UserCurr[i].address,this.UserCurr[i]._id,this.UserCurr[i].email);
                     this.route.navigate(['/dashboard']);
                 }
                 else {

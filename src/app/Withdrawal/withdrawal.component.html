@@ -6,10 +6,20 @@
 
 	<div class="panel panel-default">
 
-		<div class="panel-heading" role="tab" id="heading0" *ngFor="let item of transaction">
+		<div class="panel-heading" role="tab" id="heading0" >
 			<h4 class="panel-title">
-				{{item.address}}--------status: {{status}}
-        <button type="button">Verify</button>
+        <div *ngFor="let item of transaction">
+          {{item.address}}-----status: {{item.status}}
+          <div *ngIf="!item.confirm">
+            <button type="button" (click)="VerifyTrans(item.address)">Verify</button>
+          </div>
+          <div *ngIf="!item.confirm">
+            <button type="button" (click)="Delete(item.address)">Delete</button>
+          </div>
+          
+        </div>
+				
+       
 			</h4>
 		</div>
 	</div>

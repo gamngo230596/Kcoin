@@ -1,1 +1,48 @@
 <div class="page-header">Withdrawal</div>
+<div>
+	Actual Balance: {{actual}} || Available Balance: {{available}}
+</div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading" role="tab" id="heading0" *ngFor="let item of transaction">
+			<h4 class="panel-title">
+				{{item.address}}--------status: {{status}}
+        <button type="button">Verify</button>
+			</h4>
+		</div>
+	</div>
+	<div style="margin-top: 20px;">
+		<button class="btn btn-success" data-toggle="modal" data-target="#myModal">Withdrawal</button>
+	</div>
+	<div style="margin-top: 10px; font-size: 13px;color: red;">
+		<i>{{messageErr}}</i>
+	</div>
+</div>
+ <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Withdrawal</h4>
+    </div>
+    <div class="modal-body">
+        <label for="InputAddress">Address Receive</label>
+        <input type="text" class="form-control" id="InputAddress" placeholder="Address" #address>
+        <label for="InputMoney">Money</label>
+        <input type="text" class="form-control" id="InputMoney" placeholder="Moeny" #money>
+        <div class="controls" style="margin-top: 20px;">
+            <button id="btn-login" (click)="Send(address.value,money.value)" class="btn btn-success">Send</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  
+</div>
+</div> 

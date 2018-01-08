@@ -8,7 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class RechargeComponent {
     constructor(public nav: NavService,private route: Router){}
-    address;
+    address:any=[];
     ngOnInit(){
     	this.nav.hide();
         let that=this;

@@ -10,6 +10,7 @@ export class ValidateStatusComponent implements OnInit{
     constructor(public nav: NavService,public route :ActivatedRoute,public router:Router){
     
     }
+    available=0;
     ngOnInit(){       
     	this.nav.hide();
         this.nav.updateStatus(this.route.snapshot.params.id,"Đang xử lí").subscribe(

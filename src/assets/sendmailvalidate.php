@@ -26,8 +26,8 @@
     $mail->SMTPAuth = true;
 
     //set login details for Gmail account
-    $mail->Username = "gamcornpink";
-    $mail->Password = "OXg1Y2dyc3Q0bXYw";
+    $mail->Username = "gamcornpink96@gmail.com";
+    $mail->Password = "NBMKR5wdXVw3";
 
     //set type of protection
     $mail->SMTPSecure = "tls"; //or we can use TLS

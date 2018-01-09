@@ -11,7 +11,7 @@
         <div *ngFor="let item of transaction">
           {{item.address}}-----status: {{item.status}}
           <div *ngIf="!item.confirm">
-            <button type="button" (click)="VerifyTrans(item.address)">Verify</button>
+            <button type="button" (click)="VerifyTrans(item.address,item.money)">Verify</button>
           </div>
           <div *ngIf="!item.confirm">
             <button type="button" (click)="Delete(item.address)">Delete</button>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div style="margin-top: 20px;">
-		<button class="btn btn-success" data-toggle="modal" data-target="#myModal">Withdrawal</button>
+		<button class="btn btn-success" data-toggle="modal" data-target="#myModal" *ngIf="this.nodeSend">Withdrawal</button>
 	</div>
 	<div style="margin-top: 10px; font-size: 13px;color: red;">
 		<i>{{messageErr}}</i>
@@ -47,6 +47,9 @@
         <input type="text" class="form-control" id="InputMoney" placeholder="Moeny" #money>
         <div class="controls" style="margin-top: 20px;">
             <button id="btn-login" (click)="Send(address.value,money.value)" class="btn btn-success">Send</button>
+        </div>
+        <div style="margin-top: 10px; font-size: 13px;color: red;">
+          <i>{{messageErr2}}</i>
         </div>
     </div>
     <div class="modal-footer">

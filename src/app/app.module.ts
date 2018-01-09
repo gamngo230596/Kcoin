@@ -16,6 +16,7 @@ import { TransactionComponent } from './Transaction/transaction.component';
 import { RechargeComponent } from './Recharge/recharge.component';
 import { WithdrawalComponent } from './Withdrawal/withdrawal.component';
 import { ValidateStatusComponent } from './ValidationStatus/validatestatus.component';
+import { AdminComponent } from './Admin/admin.component';
 import { NavService } from './Service/nav.service';
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NavService } from './Service/nav.service';
     TransactionComponent,
     RechargeComponent,
     WithdrawalComponent,
-    ValidateStatusComponent
+    ValidateStatusComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { NavService } from './Service/nav.service';
     ]},
       {path:'validate/:id',component: ValidateComponent},
       {path:'validatestatus/:id',component: ValidateStatusComponent},
+      {path:'admin',component: AdminComponent},
       {path:'',component:HomeComponent},
       {path:'**',component:HomeComponent}
     ])

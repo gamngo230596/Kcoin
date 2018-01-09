@@ -21,9 +21,14 @@ export class NavService {
   address="";
   id="";
   email="";
+  addressreceived="";
+  money=0;
+  available=0;
   constructor(public http:Http) {this.visible=false; }
   hide() { this.visible = false; }
   setidwallet(address,id,email){this.address=address;this.id=id;this.email=email}
+  settransaction(address,money){this.addressreceived=address;this.money=money}
+  setavailabe(money){this.available=money}
   show() { this.visible = true; }
   setSignIn(){this.flagSignIn=true;}
   setSignOut(){this.flagSignIn=false;}
@@ -42,11 +47,11 @@ export class NavService {
   getBalance(address){
     return this.http.get('http://localhost:3000/api/admin/money/'+address.toString()).map(res=>res.json());
   }
-  transactionsHis(addressmain,address,status){
-    return this.http.post('http://localhost:3000/api/admin/transactionsHis',{"addressmain":addressmain,"address":address,"status":status}).map((data:any)=>{console.log(data)});
+  transactionsHis(addressmain,address,status,money){
+    return this.http.post('http://localhost:3000/api/admin/transactionsHis',{"addressmain":addressmain,"address":address,"status":status,"money":money}).map((data:any)=>{console.log(data)});
   }
-  withdrawal(address, money){
-    return this.http.post('http://localhost:3000/api/admin/withdrawal/',{address:address,money:money}).map((data:any)=>{console.log(data)});
+  withdrawal(addressreceived, money,address){
+    return this.http.post('http://localhost:3000/api/admin/withdrawal',{addressreceived:addressreceived,money:money,address:address}).map((data:any)=>{console.log(data)});
   }
   getTransaction(id){
     return this.http.get('http://localhost:3000/api/admin/gettransaction/'+id).map(res=>res.json());
@@ -59,6 +64,9 @@ export class NavService {
   }
   updateStatus(id,status){
     return this.http.put('http://localhost:3000/api/admin/updatestatus/'+id,{status:status}).map((data:any)=>{console.log(data)});
+  }
+  checkAddressAvailable(address){
+    return this.http.get('http://localhost:3000/api/admin/getunconfirm/'+address).map(res=>res.json());
   }  
   sendEmail(user:IMessage):Observable<IMessage> | any{
     return this.http.post(this.Url,user)

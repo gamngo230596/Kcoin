@@ -1,0 +1,39 @@
+<div class="page-header" style="font-size: 40px">List Transaction</div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading0" *ngFor="let item of Transaction;let i = index">
+            <h4 class="panel-title" >
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="true" >
+                    {{i}}. {{item.addressmain}}
+                </a>
+            </h4>
+        </div>
+        <div *ngFor="let item of Transaction;let i = index">
+        	<div id="collapse{{i}}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="heading0">
+            <div class="panel-body">
+                <div class="items">
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Money</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">{{item.status}}</td>
+                                    <td class="text-left">{{item.money}}</td>
+                                    <td class="text-left">{{item.date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+					</div>
+				</div>
+			</div>
+		</div>
+        </div>
+        
+	</div>
+</div>

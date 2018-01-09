@@ -16,7 +16,11 @@ import { TransactionComponent } from './Transaction/transaction.component';
 import { RechargeComponent } from './Recharge/recharge.component';
 import { WithdrawalComponent } from './Withdrawal/withdrawal.component';
 import { ValidateStatusComponent } from './ValidationStatus/validatestatus.component';
-import { AdminComponent } from './Admin/admin.component';
+import { AdminSignInComponent } from './Admin/AdminSignIn/adminsignin.component';
+import { AdminDashboardComponent } from './Admin/AdminDashboard/admindashboard.component';
+import { StatisticComponent } from './Statistic/statistic.component';
+import { ListComponent } from './List/list.component';
+import { ListTransactionComponent } from './ListTransaction/listtransaction.component';
 import { NavService } from './Service/nav.service';
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { NavService } from './Service/nav.service';
     RechargeComponent,
     WithdrawalComponent,
     ValidateStatusComponent,
-    AdminComponent
+    AdminSignInComponent,
+    AdminDashboardComponent,
+    ListTransactionComponent,
+    ListComponent,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,14 @@ import { NavService } from './Service/nav.service';
     ]},
       {path:'validate/:id',component: ValidateComponent},
       {path:'validatestatus/:id',component: ValidateStatusComponent},
-      {path:'admin',component: AdminComponent},
+      {path:'admin',component: AdminSignInComponent},
+      {path:'admindashboard',component: AdminDashboardComponent,
+          children:[
+            { path: '', redirectTo: 'statistic', pathMatch: 'full' },
+            { path: 'statistic', component: StatisticComponent },
+            { path: 'list', component: ListComponent },
+            { path: 'listtransaction', component: ListTransactionComponent},
+          ]},
       {path:'',component:HomeComponent},
       {path:'**',component:HomeComponent}
     ])

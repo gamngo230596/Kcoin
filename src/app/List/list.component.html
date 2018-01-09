@@ -1,0 +1,43 @@
+<div class="page-header" style="font-size: 40px">List Account</div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading0" *ngFor="let item of UserCurr;let i = index">
+            <h4 class="panel-title" >
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="true" >
+                    {{i}}. {{item.email}}
+                </a>
+            </h4>
+        </div>
+        <div *ngFor="let item of UserCurr;let i = index">
+        	<div id="collapse{{i}}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="heading0">
+            <div class="panel-body">
+                <div class="items">
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>IDwallet</th>
+                                    <th>Actual</th>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">{{item.idwallet}}</td>
+                                    <td class="text-left">{{item.actualbalance}}</td>
+                                    <td class="text-left">{{item.firstname}}</td>
+                                    <td class="text-left">{{item.lastname}}</td>
+                                    <td class="text-left">{{item.address}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+					</div>
+				</div>
+			</div>
+		</div>
+        </div>
+        
+	</div>
+</div>

@@ -8,25 +8,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class WithdrawalComponent {
     constructor(public nav: NavService,private route: Router){
-        setInterval(()=>{
-            this.nav.getBalance(this.nav.address).subscribe(res=>{
-                var balance=parseInt(""+res);
-                if(balance<this.actual){
-                    for(var j=0;j<this.transaction.length;j++)
-                    {
-                        if(this.transaction[j].status==="Đang xử lí")
-                        {
-                            this.nav.updateStatus(this.transaction[j]._id,"Hoàn thành").subscribe(
-                            data=>console.log(data),
-                            err=>console.log(err));
-                            this.nav.updateActualBalance(this.nav.id,balance).subscribe(
-                            data=>console.log(data),
-                            err=>console.log(err));
-                        }
-                    }
-                }
-            });
-        },60000);
+            
+      
+        
+       
     }
     checkreceive:any=[];
     actual=0;
@@ -54,23 +39,40 @@ export class WithdrawalComponent {
         {
        this.nav.getTransaction(this.nav.address).subscribe(trans=>{this.transaction=trans});
         setTimeout(()=>{
+
+            if(this.nav.address!==""){
+            this.nav.checkAddressAvailable(this.nav.address).subscribe(data=>{
+
+            if(data.length===0)
+            {
+                console.log("test",data);
+                console.log("trans",this.transaction);
+                for(var j=0;j<this.transaction.length;j++)
+                {
+                    if(this.transaction[j].status==="Đang xử lí")
+                    {
+                        this.nav.updateStatus(this.transaction[j]._id,"Hoàn thành").subscribe(
+                        data=>console.log(data),
+                        err=>console.log(err));
+                        this.nav.updateActualBalance(this.nav.id,this.available).subscribe(
+                        data=>console.log(data),
+                        err=>console.log(err));
+                        this.notSend=true;
+                    }
+                }
+            }
+        });
+        }
+
             for(var i=0;i<this.transaction.length;i++)
             {
                 if(this.transaction[i].status==="Đang xử lí")
                 {
                     this.notSend=false;
-                    var change=parseInt(""+this.available)-parseInt(""+this.transaction[i].money);
-                    this.available=change;
-                    this.nav.updateAvailableBalance(this.transaction[i]._id,this.available).subscribe(
-                    data=>console.log(data),
-                    error=>console.log(error));
-                    this.nav.withdrawal(this.transaction[i].address,this.transaction[i].money,this.nav.address).subscribe(
-                        data=>console.log(data),
-                        error=>console.log(error));
                 }
             }
                 
-        },4000); 
+        },5000); 
     }
         
     }
@@ -106,13 +108,13 @@ export class WithdrawalComponent {
                             }
                             this.message=obj;
                             this.nav.settransaction(addressreceived,money);
-                            /*setTimeout(()=>{
+                            setTimeout(()=>{
                                 this.nav.sendEmailStatus(this.message).subscribe(res=>{
                                     console.log('Success!',res);
                                 },error=>{
                                     console.log('Err',error);
                                 });
-                            },2000);*/
+                            },2000);
                             
                         }
                         
@@ -125,6 +127,11 @@ export class WithdrawalComponent {
         },3000);
     }
         
+    }
+    Delete(id){
+        this.nav.deleteTransacton(id).subscribe(
+            data=>console.log(data),
+            err=>console.log(err));
     }
 
      

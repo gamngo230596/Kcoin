@@ -20,7 +20,6 @@ export class SignInComponent implements OnInit{
     frmSignIn;
     UserCurr:any=[];
     messageErr;
-    isSignIn:boolean;
     ngOnInit(){
     	this.nav.hide();
     	
@@ -45,28 +44,19 @@ export class SignInComponent implements OnInit{
             console.log(info.password);
         },5000);
         for(let i=0;i<this.UserCurr.length;i++)
-        {
+        {   
 
             let pass=Crypto.AES.decrypt(this.UserCurr[i].password,"secret key").toString(Crypto.enc.Utf8);
-            console.log(pass);
-            if(this.UserCurr[i].idwallet===info.ID && pass===info.password)
+           
+            if(this.UserCurr[i].idwallet===info.ID && pass===info.password && this.UserCurr[i].active)
             {
-                this.isSignIn=true;
+                this.nav.setSignIn();
+                    //console.log(this.UserCurr[i].address);
+                    this.nav.setidwallet(this.UserCurr[i].address,this.UserCurr[i]._id,this.UserCurr[i].email);
+                    this.route.navigate(['/dashboard']);
             }
             else{
                 this.messageErr="Incorrect ID or Password";
-            }
-            if(this.isSignIn)
-            {
-                if(this.UserCurr[i].active){
-                    this.nav.setSignIn();
-                    this.nav.setidwallet(this.UserCurr[i].address,this.UserCurr[i]._id,this.UserCurr[i].email);
-                    this.route.navigate(['/dashboard']);
-                }
-                else {
-                    this.messageErr="Check mail to active your account!";
-                }
-                
             }
 
             

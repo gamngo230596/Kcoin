@@ -1,2 +1,26 @@
 <div class="page-header">Recharge</div>
-<div>Address: {{address}}</div>
+<div>Address: {{address}}</div> 
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading" role="tab" id="heading0" >
+			<h4 class="panel-title">
+
+				Có tài khoản chuyển {{deposits}} Kcoin vào tài khoản của bạn
+<!-- 				<div *ngFor="let item of transaction">
+					{{item.address}}-----status: {{item.status}}
+					<div *ngIf="!item.confirm">
+						<button type="button" (click)="VerifyTrans(item.address,item.money)">Verify</button>
+					</div>
+					<div *ngIf="!item.confirm">
+						<button type="button" (click)="Delete(item.address)">Delete</button>
+					</div>
+
+				</div> -->
+				 
+			</h4>
+		</div>
+	</div>
+</div>

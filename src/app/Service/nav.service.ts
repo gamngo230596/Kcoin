@@ -53,6 +53,12 @@ export class NavService {
   transactionsHis(addressmain,address,status,money){
     return this.http.post('http://localhost:3000/api/admin/transactionsHis',{"addressmain":addressmain,"address":address,"status":status,"money":money}).map((data:any)=>{console.log(data)});
   }
+  transactionsRev(idwallet,deposits){
+  return this.http.post('http://localhost:3000/api/admin/transactionsRev',{"idwallet":idwallet, "deposits":deposits }).map((data:any)=>{console.log(data)});
+  }
+  getArrayTransactionRev(){
+    return this.http.get('http://localhost:3000/api/admin/transactionsRev').map(res=>res.json());
+  }
   withdrawal(addressreceived, money,address){
     return this.http.post('http://localhost:3000/api/admin/withdrawal',{addressreceived:addressreceived,money:money,address:address}).map((data:any)=>{console.log(data)});
   }

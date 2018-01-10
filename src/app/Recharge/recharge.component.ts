@@ -35,6 +35,9 @@ export class RechargeComponent {
                     this.nav.updateAvailableBalance(this.nav.id,balance).subscribe(
                         data=>console.log(data),
                         err=>console.log(err));
+                    this.nav.transactionsRev(this.nav.address, this.deposits).subscribe(
+                        data=>console.log(data),
+                        err=>console.log(err));
 
                 }
                 else
@@ -49,13 +52,13 @@ export class RechargeComponent {
     available=0;
     deposits=0;
     haveDepositors = false;
-    transaction:any=[];
+    transactionsRev:any=[];
 
     ngOnInit(){
         this.nav.hide();
         let that=this;
         this.address = this.nav.address;
-        setTimeout(()=>{console.log(this.address);},5000);
+        
         //console.log(this.deposits);
         this.nav.getUser().subscribe(data=>{
             for(var i=0;i<data.length;i++)
@@ -68,6 +71,15 @@ export class RechargeComponent {
             }
              
         });
+        setTimeout(()=>{
+            this.nav.getArrayTransactionRev().subscribe(data=>{
+                for (var i = 0;i<data.length; i++) {
+                    if (data[i].idwallet===this.nav.address) {
+                        this.transactionsRev=data[i];
+                    }
+                }
+            })
+        },5000);
     }
       
 }

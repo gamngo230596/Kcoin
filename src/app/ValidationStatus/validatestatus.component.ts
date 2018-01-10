@@ -45,7 +45,7 @@ export class ValidateStatusComponent implements OnInit{
             });
         setTimeout(()=>{
             this.router.navigate(['./signin']);
-        },5000);
+        },10000);
     	
     }
     

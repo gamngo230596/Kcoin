@@ -21,6 +21,8 @@ import { AdminDashboardComponent } from './Admin/AdminDashboard/admindashboard.c
 import { StatisticComponent } from './Statistic/statistic.component';
 import { ListComponent } from './List/list.component';
 import { ListTransactionComponent } from './ListTransaction/listtransaction.component';
+import { ListAddressComponent } from './ListAddress/listaddress.component';
+
 import { NavService } from './Service/nav.service';
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { NavService } from './Service/nav.service';
     AdminDashboardComponent,
     ListTransactionComponent,
     ListComponent,
-    StatisticComponent
+    StatisticComponent,
+    ListAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { NavService } from './Service/nav.service';
             { path: 'statistic', component: StatisticComponent },
             { path: 'list', component: ListComponent },
             { path: 'listtransaction', component: ListTransactionComponent},
+            { path: 'listaddress', component: ListAddressComponent},
           ]},
       {path:'',component:HomeComponent},
       {path:'**',component:HomeComponent}
